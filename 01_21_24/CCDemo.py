@@ -43,3 +43,4 @@ ccSum += digitList[4] + digitList[5] + digitList[6] + digitList[7] \
     + digitList[8] + digitList[9] + digitList[10] + digitList[11] \
     + digitList[12] + digitList[13] + digitList[14] + digitList[15]
 print(ccSum)
+#end of program for now
