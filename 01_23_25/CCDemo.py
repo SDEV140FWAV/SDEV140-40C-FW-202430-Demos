@@ -5,13 +5,19 @@ digitList = [int(digit) for digit in creditCard]
     digitList.append(int(digit)) """
     
 print(digitList)
-
-for index in range(0,15,2):
+digitListcpy = []
+""" for index in range(0,15,2):
     digitList[index] = digitList[index] * 2
-    digitList[index] = digitList[index] % 10 + int(digitList[index]/10)
+    digitList[index] = digitList[index] % 10 + int(digitList[index]/10) """
+for digit in digitList[::2]:
+    digit = digit * 2
+    digit = digit % 10 + int(digit/10)
+    digitListcpy.append( digit)
+for digit in digitList[1::2]:
+    digitListcpy.append(digit)
 
-print(digitList)
-ccSum = sum(digitList)
+print(digitListcpy)
+ccSum = sum(digitListcpy)
 print(ccSum)
 """
 
