@@ -1,34 +1,33 @@
 creditCard = input("Enter your credit card number: ")
 creditCard = creditCard.replace(" ", "")
-if len(creditCard) != 16:
-    print("Credit card numbers must be 16 digits.")
+if len(creditCard) != 16 or not creditCard.isdigit():
+    print("Credit card numbers must be 16 numeric digits.")
 else:
-    if creditCard.isdigit():
-        digitList = [int(digit) for digit in creditCard]
-        """ for digit in creditCard:
-            digitList.append(int(digit)) """
-            
-        print(digitList)
-        digitListcpy = []
-        """ for index in range(0,15,2):
-            digitList[index] = digitList[index] * 2
-            digitList[index] = digitList[index] % 10 + int(digitList[index]/10) """
-        for digit in digitList[::2]:
-            digit = digit * 2
-            digit = digit % 10 + int(digit/10)
-            digitListcpy.append( digit)
-        for digit in digitList[1::2]:
-            digitListcpy.append(digit)
+    
+    digitList = [int(digit) for digit in creditCard]
+    """ for digit in creditCard:
+        digitList.append(int(digit)) """
+        
+    print(digitList)
+    digitListcpy = []
+    """ for index in range(0,15,2):
+        digitList[index] = digitList[index] * 2
+        digitList[index] = digitList[index] % 10 + int(digitList[index]/10) """
+    for digit in digitList[::2]:
+        digit = digit * 2
+        digit = digit % 10 + int(digit/10)
+        digitListcpy.append( digit)
+    for digit in digitList[1::2]:
+        digitListcpy.append(digit)
 
-        print(digitListcpy)
-        ccSum = sum(digitListcpy)
-        print(ccSum)
-        if ccSum % 10 == 0:
-            print(f"{creditCard} is a valid credit card number.")
-        else:
-            print(f"{creditCard} is not valid!")
+    print(digitListcpy)
+    ccSum = sum(digitListcpy)
+    print(ccSum)
+    if ccSum % 10 == 0:
+        print(f"{creditCard} is a valid credit card number.")
     else:
-        print("The credit card number can't contain non-digts.")
+        print(f"{creditCard} is not valid!")
+    
 print("Thank you for checking your credit card number with us!")
 """
 
