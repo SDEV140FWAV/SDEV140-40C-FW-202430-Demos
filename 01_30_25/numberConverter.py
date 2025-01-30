@@ -5,13 +5,16 @@ import random
 import sys
 
 binaryNum = input("Enter a binary string: ")
-hexDigits = {"0":"0000","1":"0001","A":"1010", "a":"1010","C":"1100"}
-hexDigits["B"] = "1011"
-hd = input("Enter a hex digit: ")
+hexDigits = {"0":"0000","1":"0001","2":"0010","3":"0011","4":"0100", 
+             "5":"0101","6":"0110","7":"0111","8":"1000","9":"1001",
+             "A":"1010","a":"1010","B":"1011","C":"1100","D":"1101",
+             "E":"1110","F":"1111"}
+""" hexDigits["B"] = "1011" """
+""" hd = input("Enter a hex digit: ")
 print(hexDigits.get(hd, f"There is no binary mapping for {hd}"))
 print(hexDigits.pop(hd,f"There is no binary mapping for {hd}"))
-print(hexDigits)
-del hexDigits["F"]
+print(hexDigits) """
+
 
 binaryNum = binaryNum.replace(" ", "")
 if binaryNum.isdigit():
@@ -88,7 +91,34 @@ if binaryNum.isdigit():
                 case "F":
                     decimalNum += 15 * 16**exponent
     print(f"{hexNum} is {decimalNum} in decimal")
-                
 
+                
+length = random.randint(1,11)
+hexNumber = ""
+for i in range(length):
+    digit = random.randint(0,16)
+    if digit >= 10:
+        match digit:
+            case 10:
+                digit = "A"
+            case 11:
+                digit = "B"
+            case 12:
+                digit = "C"
+            case 13:
+                digit = "D"
+            case 14:
+                digit = "E"
+            case 15:
+                digit = "F"
+    else:
+        digit = str(digit)
+    hexNumber =  hexNumber + digit
+
+print(hexNumber)
+binaryNum = ""
+for digit in hexNumber:
+    binaryNum = binaryNum + hexDigits[digit]
+print(binaryNum)
 
 
