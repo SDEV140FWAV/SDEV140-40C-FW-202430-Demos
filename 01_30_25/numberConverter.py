@@ -1,3 +1,6 @@
+""" Author: Angela Venable
+    number converter program converts numbers from binary to decimal nd hexadecimal
+"""
 import random
 import sys
 
