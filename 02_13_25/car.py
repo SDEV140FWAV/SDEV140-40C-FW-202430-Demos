@@ -4,7 +4,7 @@ class Car:
         self.model = model
         self.year = year
         self.odometer_reading = 0
-        
+
     def __str__(self):
         long_name = f"{self.year} {self.make} {self.model}"
         return long_name.title()
@@ -23,6 +23,54 @@ class Car:
         """Add the given amount to the odometer reading."""
         self.odometer_reading += miles
 
-    def fill_gas_tank():
+    def fill_gas_tank(self):
         print("The gas tank is now full.")
+
+class ElectricCar(Car):
+    def __init__(self, make, model, year):
+        super().__init__(make, model, year)
+        self.battery_size = 40
     
+    def describe_battery(self):
+        print(f"This car has a {self.battery_size}-kWh battery.")
+    
+    def fill_gas_tank(self):
+        print("This car doesn't have a gas tank!")
+
+def look_at_car(car:Car):
+    print(car)
+    car.read_odometer()
+    car.fill_gas_tank()
+    
+
+
+""" myCar = ElectricCar('nissan', 'leaf', 2024)
+print(myCar)
+myCar.fill_gas_tank()
+otherCar = Car('honda', 'crv','2014')
+otherCar.fill_gas_tank() 
+
+look_at_car(otherCar)
+look_at_car(myCar) """
+carList = []
+while(True):
+    choice = input("Choose an option:\n1. Create a Car\n2. Create an Electric Car\n3. Look at a Car\n4.Exit\n")
+    if choice == '1' or choice == "2":
+        make = input("Car Make? ")
+        model = input("Car Model? ")
+        year = input("Car Year? ")
+        if choice == '1':
+            carList.append(Car(make, model, year))
+        else:
+            carList.append(ElectricCar(make, model, year))
+    elif choice == '3':
+        if len(carList) == 0:
+            print("There are no cars to look at.")
+            continue
+        for i in range(len(carList)):
+            print(f"{i+1}. {carList[i]}")
+        carNum = int(input("Please choose a car from the list "))
+        look_at_car(carList[carNum - 1]) 
+    else:
+        break
+
