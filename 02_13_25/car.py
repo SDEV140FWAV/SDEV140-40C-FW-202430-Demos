@@ -10,7 +10,7 @@ class Car:
         return long_name.title()
     
     def read_odometer(self):
-        print(f"This car has {self.odometer_reading} miles on it.")
+        return f"This car has {self.odometer_reading} miles on it."
 
     def update_odometer(self, mileage):
         """Set the odometer reading to the given value."""
@@ -39,38 +39,41 @@ class ElectricCar(Car):
 
 def look_at_car(car:Car):
     print(car)
-    car.read_odometer()
+    print(car.read_odometer())
     car.fill_gas_tank()
     
 
+def main():
+    """ myCar = ElectricCar('nissan', 'leaf', 2024)
+    print(myCar)
+    myCar.fill_gas_tank()
+    otherCar = Car('honda', 'crv','2014')
+    otherCar.fill_gas_tank() 
 
-""" myCar = ElectricCar('nissan', 'leaf', 2024)
-print(myCar)
-myCar.fill_gas_tank()
-otherCar = Car('honda', 'crv','2014')
-otherCar.fill_gas_tank() 
-
-look_at_car(otherCar)
-look_at_car(myCar) """
-carList = []
-while(True):
-    choice = input("Choose an option:\n1. Create a Car\n2. Create an Electric Car\n3. Look at a Car\n4.Exit\n")
-    if choice == '1' or choice == "2":
-        make = input("Car Make? ")
-        model = input("Car Model? ")
-        year = input("Car Year? ")
-        if choice == '1':
-            carList.append(Car(make, model, year))
+    look_at_car(otherCar)
+    look_at_car(myCar) """
+    carList = []
+    while(True):
+        choice = input("Choose an option:\n1. Create a Car\n2. Create an Electric Car\n3. Look at a Car\n4.Exit\n")
+        if choice == '1' or choice == "2":
+            make = input("Car Make? ")
+            model = input("Car Model? ")
+            year = input("Car Year? ")
+            if choice == '1':
+                carList.append(Car(make, model, year))
+            else:
+                carList.append(ElectricCar(make, model, year))
+        elif choice == '3':
+            if len(carList) == 0:
+                print("There are no cars to look at.")
+                continue
+            for i in range(len(carList)):
+                print(f"{i+1}. {carList[i]}")
+            carNum = int(input("Please choose a car from the list "))
+            look_at_car(carList[carNum - 1]) 
         else:
-            carList.append(ElectricCar(make, model, year))
-    elif choice == '3':
-        if len(carList) == 0:
-            print("There are no cars to look at.")
-            continue
-        for i in range(len(carList)):
-            print(f"{i+1}. {carList[i]}")
-        carNum = int(input("Please choose a car from the list "))
-        look_at_car(carList[carNum - 1]) 
-    else:
-        break
+            break
+
+if __name__ == "__main__": #if the file is being run directly instead of imported
+    main()
 
