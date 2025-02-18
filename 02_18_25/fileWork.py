@@ -1,4 +1,5 @@
 import random
+import os
 #/home/avenable11/SDEV140-40C-FW-202430-Demos/02_18_25/mydata.dat
 def process_outcome():
     file = open("mydata.dat", 'r')
@@ -42,6 +43,9 @@ def get_username():
     return username
 
 def main():
+    cwd = os.getcwd()
+    if not cwd.count("02_18_25"):
+        os.chdir("02_18_25")
     while True:
         print("Welcome to the tournament:")
         print("1. Add Score")
