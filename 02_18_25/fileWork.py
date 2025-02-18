@@ -1,38 +1,60 @@
+import random
 
-file = open("mydata.dat", 'r')
-#text = file.read()
-#print(text)
-userscores = {}
-i = 0
-hobbitTotal = 0
-while i < 30:
-    i+=1
-    line = file.readline()
-    data = line.split()
-    #print(data)
-    userscores[int(data[2])] = data[0] + ' ' + data[1]
-    hobbitTotal += int(data[2])
+def process_outcome():
+    file = open("mydata.dat", 'r')
+    #text = file.read()
+    #print(text)
+    userscores = {}
+    gamerTotal = 0
+    hobbitTotal = 0
+    for line in file:
+        data = line.split()
+        if data[1].isnumeric():
+            userscores[int(data[1])] = data[0]
+            gamerTotal += int(data[1])
+        else:
+            userscores[int(data[2])] = data[0] + ' ' + data[1]
+            hobbitTotal += int(data[2])
+    #print(userscores)
+    keys = list(userscores.keys())
+    keys.sort(reverse=True)
+    outcome = f"The winner is {userscores[keys[0]]} with a score of {keys[0]}\n"
+    if gamerTotal > hobbitTotal:
+        team = "Gamers"
+        winscore = gamerTotal
+        losescore = hobbitTotal
+    else:
+        team = "Hobbits"
+        winscore = hobbitTotal
+        losescore = gamerTotal
 
-i = 0
-gamerTotal = 0
-while i < 30:
-    i+=1
-    line = file.readline()
-    data = line.split()
-    userscores[int(data[1])] = data[0]
-    gamerTotal += int(data[1])
+    outcome += f"The winning team is the {team} with a score of {winscore} to {losescore}."
+    return outcome
 
-#print(userscores)
-keys = list(userscores.keys())
-keys.sort(reverse=True)
-print(f"The winner is {userscores[keys[0]]} with a score of {keys[0]}")
-if gamerTotal > hobbitTotal:
-    team = "Gamers"
-    winscore = gamerTotal
-    losescore = hobbitTotal
-else:
-    team = "Hobbits"
-    winscore = hobbitTotal
-    losescore = gamerTotal
+def add_score(username):
+    file = open("mydata.dat",'a')
+    score = random.randint(100,10000000)
+    file.write("\n" + username + " " + str(score))
+    file.close()
 
-print(f"The winning team is the {team} with a score of {winscore} to {losescore}.")
+def get_username():
+    username = input("Enter the username: ")
+    return username
+
+def main():
+    while True:
+        print("Welcome to the tournament:")
+        print("1. Add Score")
+        print("2. Finish and display results")
+        choice = int(input("Your choice? "))
+        if choice == 1:
+            username = get_username()
+            add_score(username)
+        else:
+            results = process_outcome()
+            print(results)
+            break
+
+if __name__ == "__main__":
+    main()
+
