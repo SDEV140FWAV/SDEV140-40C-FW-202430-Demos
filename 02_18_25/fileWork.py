@@ -1,5 +1,5 @@
 import random
-
+#/home/avenable11/SDEV140-40C-FW-202430-Demos/02_18_25/mydata.dat
 def process_outcome():
     file = open("mydata.dat", 'r')
     #text = file.read()
