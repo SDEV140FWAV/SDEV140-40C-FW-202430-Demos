@@ -86,8 +86,8 @@ def process_choice(choice):
     result = {}
     if choice == 1:
         binaryNum = getBinary()
-        #hex = binaryToHex("101")
-        result = {"inputNumber":"101", "resultNum":5, "result":"hexadecimal"}
+        hex = binaryNum.binaryToHex()
+        result = {"inputNumber":binaryNum.binaryNum, "resultNum":hex, "result":"hexadecimal"}
 
     elif choice == 2:
         binaryNum = getBinary()
