@@ -63,5 +63,38 @@ class Game():
                 self.deck.cards.remove(card)
                 self.foundations[3].playCard(card)
                 break
+    def drawCard(self):
+        if len(self.deck) == 0:
+            raise RuntimeError("Deck is empty")
+        if self.cardToPlay == None:
+            self.cardToPlay = self.deck.deal()
+    def playCard(self, destNum, sourceNum = 0, source = "deck", destination="foundation"):
+        if source == "deck":
+            if self.cardToPlay == None:
+                raise RuntimeError("Invalid Move")
+            if destination == "foundation":
+                if self.foundations[destNum].playCard(self.cardToPlay):
+                    self.cardToPlay = None
+                else:
+                    raise RuntimeError(f"Invalid Move: The next card for foundation #{destNum} is {self.foundations[destNum].sequence[self.foundations[destNum].topCard + 1]}")
+            elif destination == "waste":
+                self.wastes[destNum].playCard(self.cardToPlay)
+                self.cardToPlay = None
+        elif source == "waste":
+            if len(self.wastes[sourceNum]) == 0:
+                raise RuntimeError("Invalid Move: Waste Pile is Empty")
+            if destination == "foundation":
+                card = self.wastes[sourceNum].getTopCard()
+                if not self.foundations[destNum].playCard(card):
+                    self.wastes[sourceNum].playCard(card)
+                    raise RuntimeError(f"Invalid Move: The next card for foundation #{destNum} is {self.foundations[destNum].sequence[self.foundations[destNum].topCard + 1]}")
+            else:
+                raise RuntimeError("Invalid Move: Waste Cards can only be played on foundations")
     
+    def calculateScore(self):
+        score = 0
+        score += len(self.deck)
+        for pile in self.wastes:
+            score += len(pile)
+        return score        
 
