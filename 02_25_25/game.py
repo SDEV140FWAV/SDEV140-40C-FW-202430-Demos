@@ -96,5 +96,11 @@ class Game():
         score += len(self.deck)
         for pile in self.wastes:
             score += len(pile)
-        return score        
+        return score      
+
+    def finished(self):
+        return self.cardToPlay == None and len(self.deck) == 0
+
+    def wastePlay(self):
+        return len(self.wastes[0]) > 0 or len(self.wastes[1]) > 0 or len(self.wastes[2]) > 0 or len(self.wastes[3]) > 0
 
