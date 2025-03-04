@@ -114,7 +114,7 @@ class GameArea(tk.Canvas):
         if foundationDrop != None:
             try:
                 if self.waste_num != -1:
-                    self.game.playCard(destPileNum=foundationDrop, source="waste", pileNum=self.waste_num)
+                    self.game.playCard(destNum=foundationDrop, source="waste", sourceNum=self.waste_num)
                     self.delete(self.waste_card[self.waste_num])
                     if self.game.wastes[self.waste_num].topCard != -1:
                         self.waste_card[self.waste_num] = self.create_window(self.waste_pos[self.waste_num]["x"] + 50, self.waste_pos[self.waste_num]["y"] + 75, window=CardRender(self, self.game.wastes[self.waste_num].cards[self.game.wastes[self.waste_num].topCard]))
@@ -124,7 +124,7 @@ class GameArea(tk.Canvas):
 
                 else:
 
-                    self.game.playCard(foundationDrop)
+                    self.game.playCard(destNum=foundationDrop)
                     self.drawn_card = 0
 
                 self.delete(self.selected_item)
@@ -155,7 +155,7 @@ class GameArea(tk.Canvas):
         else:
              wasteDrop = self.find_waste(event.x, event.y)
              if wasteDrop != None:
-                 self.game.playCard(wasteDrop, destination="waste", source="deck")
+                 self.game.playCard(destNum=wasteDrop, destination="waste", source="deck")
                  self.delete(self.selected_item)
                  self.selected_item = None
                  self.waste_card[wasteDrop] = self.create_window(self.waste_pos[wasteDrop]["x"] + 50, self.waste_pos[wasteDrop]["y"] + 75, window=CardRender(self, self.game.wastes[wasteDrop].cards[self.game.wastes[wasteDrop].topCard]))
