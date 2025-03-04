@@ -6,6 +6,7 @@ def main():
         displayGame(game)
         choice = gameMenu(game)
         finish = processChoice(choice, game)
+    print(f"Game Over! Final Score {game.calculateScore()}")
 
     
 def gameMenu(game:Game):
@@ -72,6 +73,35 @@ def playCard(game:Game):
     except RuntimeError as e:
         print(e)
 
+def playWasteCard(game:Game):
+    sourcePileType = "waste"
+    destPileType = "foundation"
+   
+    while True:
+        try:
+            wpileNum = int(input(f"Which waste pile (1-4) do you want to play from? "))
+            if wpileNum < 1 or wpileNum > 4:
+                print("Please enter a number 1 - 4")
+                continue
+            else:
+                break
+        except ValueError:
+            print("You entered something that is not a number.")
+    while True:
+        try:
+            fpileNum = int(input(f"Which foundation pile (1-4) do you want to play on? "))
+            if fpileNum < 1 or fpileNum > 4:
+                print("Please enter a number 1 - 4")
+                continue
+            else:
+                break
+        except ValueError:
+            print("You entered something that is not a number.")
+    try:
+        game.playCard(destNum=fpileNum-1, destination=destPileType, sourceNum=wpileNum-1, source=sourcePileType)
+    except RuntimeError as e:
+        print(e)
+
 
 def processChoice(choice:int, game:Game):
     if choice == 1:
@@ -83,6 +113,8 @@ def processChoice(choice:int, game:Game):
             return False
         else:
             return True
+    if choice == 2:
+        playWasteCard(game)
 
 
     
